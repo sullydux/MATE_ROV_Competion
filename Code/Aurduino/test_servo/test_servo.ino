@@ -5,7 +5,11 @@
 Servo myservo;
 
 int pos = 0;
+int repeats = 10;
 int go = 0;
+int goes = 0;
+int maxMS = 240000;
+int minMS = 60000;
 
 int servoPin = 13;
 
@@ -20,11 +24,34 @@ void setup() {
 }
 
 void loop() {
-  while (go <= 5) {
-    myservo.write(0);
-    delay(500);
-    myservo.write(180);
-    delay(500);
-    go += 1;
+  while (goes <= repeats) {
+    while (go <= 10) {
+      myservo.write(0);
+      delay(500);
+      myservo.write(180);
+      delay(500);
+      myservo.write(90);
+      delay(500);
+      myservo.write(180);
+      delay(500);
+      myservo.write(90);
+      delay(500);
+      myservo.write(0);
+      delay(500);
+      myservo.write(90);
+      delay(500);
+      myservo.write(0);
+      delay(500);
+      go += 1;
+    }
+    while (go <= 30) {
+      myservo.write(0);
+      delay(500);
+      myservo.write(180);
+      delay(500);
+      go += 1;
+    }
+    delay(random(maxMS, minMS));
+    goes += 1;
   }
 }

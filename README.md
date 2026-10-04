@@ -15,3 +15,5 @@
 ## Instructions
 
 Each part(code, 3D files, ect) should be in its own subfolder to say organised.
+
+### Coding use DOIT ESP32 DEVKIT V1
