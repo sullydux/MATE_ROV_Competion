@@ -3,8 +3,10 @@
 ## Float
 
 ## Todo
-
 HTML with button to restart, start, and display data as graph.
+
+## Graph
+7 rows for test 1-16 and 6 collums for data. stores as structs in an array
 
 ### Data to be displayed
 - Company #
