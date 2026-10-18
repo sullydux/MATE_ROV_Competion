@@ -10,7 +10,7 @@ Make ESP32 serve a WiFi and webpage. Webpage has three true buttons: Start Missi
 
 ### Data to be displayed
 - Company # - String
-- IRL Time (UTC)
+- IRL Time (UTC) - String
 - Pressure (Paskals) - Float
 - Depth (M or CM) - Float
 - Light (irradience or lux or anything) - Float
