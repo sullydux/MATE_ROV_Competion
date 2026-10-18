@@ -12,7 +12,7 @@ Good luck furture Charlie or other viewers/editors.
 
 String Number_De_Company = "Unknown";
 
-const char* ssid     = "Free Buoyancy WiFi";
+const char* ssid     = "NSA Van 37";
 const char* password = "Hard-Pass";
 const int servoPin = 13;
 int on_mission = 0;
@@ -64,17 +64,18 @@ void handleRoot() {
 
 void Start_Mission() {
 	Serial.println("Start_Mission");
-	server.send(200, "text/plain", "ok");
+	server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Olórin");
+	on_mission
 }
 
 void Reload() {
 	Serial.println("Reload");
-	server.send(200, "text/plain", "ok");
+	server.send(200, "text/plain", "Friendly reminder: if you spam this no one will be angry");
 }
 
 void Reset() {
 	Serial.println("Reset");
-	server.send(200, "text/plain", "ok");
+	server.send(200, "text/plain", "Warning - Data has been completely and uterly swept into the trash can - Warning");
 	for (int i = 0; i < 16; i++){
 		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
 		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2027-01-01 00:00:01";
@@ -87,7 +88,7 @@ void Reset() {
 
 void Emergency_Emergency_Emergency() {
 	Serial.println("Emergency_Emergency_Emergency");
-	server.send(200, "text/plain", "ok");
+	server.send(200, "text/plain", "Warning - Emergency Data has been loaded - Warning");
 	for (int i = 0; i < 16; i++){
 		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
 		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2038-01-19 03:14:06";
