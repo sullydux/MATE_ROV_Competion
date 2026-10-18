@@ -2,13 +2,15 @@
 #include <WebServer.h>
 #include <ESP32Servo.h> 
 #include <PID_v1.h>
+#include <string>
+#include <cmath>
 
 /*
 Hello dear readers of this code. This will be my only comment.
 Good luck furture Charlie or other viewers/editors.
 */
 
-String Number_De_Company = "Unknown"
+String Number_De_Company = "Unknown";
 
 const char* ssid     = "Free Buoyancy WiFi";
 const char* password = "Hard-Pass";
@@ -74,12 +76,12 @@ void Reset() {
 	Serial.println("Reset");
 	server.send(200, "text/plain", "ok");
 	for (int i = 0; i < 16; i++){
-		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company
-		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2027-01-01 00:00:01"
-		All_Data_Ever_Needed_To_Function[i].Depth = 0.0
-		All_Data_Ever_Needed_To_Function[i].Pressure = 0.0
-		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 0.0
-		All_Data_Ever_Needed_To_Function[i].Temperature = 0.0
+		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
+		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2027-01-01 00:00:01";
+		All_Data_Ever_Needed_To_Function[i].Depth = 0.0;
+		All_Data_Ever_Needed_To_Function[i].Pressure = 0.0;
+		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 0.0;
+		All_Data_Ever_Needed_To_Function[i].Temperature = 0.0;
 	}
 }
 
@@ -87,12 +89,12 @@ void Emergency_Emergency_Emergency() {
 	Serial.println("Emergency_Emergency_Emergency");
 	server.send(200, "text/plain", "ok");
 	for (int i = 0; i < 16; i++){
-		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company
-		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2038-01-19 03:14:06"
-		All_Data_Ever_Needed_To_Function[i].Depth = 9324726210.0343
-		All_Data_Ever_Needed_To_Function[i].Pressure = 65536.0
-		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 256.0
-		All_Data_Ever_Needed_To_Function[i].Temperature = 16.0
+		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
+		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2038-01-19 03:14:06";
+		All_Data_Ever_Needed_To_Function[i].Depth = 9324726210.0343;
+		All_Data_Ever_Needed_To_Function[i].Pressure = 65536.0;
+		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 256.0;
+		All_Data_Ever_Needed_To_Function[i].Temperature = 16.0;
 	}
 }
 

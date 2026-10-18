@@ -29,32 +29,5 @@ yarn-error.log*
 # Environment files
 .env
 .env.*
-
-# Keep code and project files tracked
-!**/*.py
-!**/*.pyw
-!**/*.js
-!**/*.jsx
-!**/*.ts
-!**/*.tsx
-!**/*.json
-!**/*.html
-!**/*.css
-!**/*.scss
-!**/*.sass
-!**/*.md
-!**/*.yml
-!**/*.yaml
-!**/*.toml
-!**/*.xml
-!**/*.sh
-!**/*.bash
-!**/*.zsh
-!**/*.sql
-!**/*.svg
-!**/*.png
-!**/*.jpg
-!**/*.jpeg
-!**/*.gif
-!**/*.webp
-!**/*.ico
+.DS_Store
+Code/Aurduino/.DS_Store
