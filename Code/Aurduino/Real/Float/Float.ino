@@ -10,23 +10,24 @@ Hello dear readers of this code. This will be my only comment.
 Good luck furture Charlie or other viewers/editors.
 */
 
-String Number_De_Company = "Unknown";
+String Number_of_Company = "Unknown";
 
 const char* ssid     = "NSA Van 37";
 const char* password = "Hard-Pass";
 const int servoPin = 13;
 int on_mission = 0;
 
+const int DATA_COUNT = 16;
 
 struct A_Sixteenth_Of_All_Data_Ever_Needed_To_Function {
-	String Number_De_Company = Number_De_Company;
+	String Number_De_Company = Number_of_Company;
 	String Zulu_Time;
-	float Pressure;
-	float Depth;
-	float Sun_Levels;
-	float Temperature;
+	float Pressure = 0.0;
+	float Depth = 0.0;
+	float Sun_Levels = 0.0;
+	float Temperature = 0.0;
 };
-A_Sixteenth_Of_All_Data_Ever_Needed_To_Function All_Data_Ever_Needed_To_Function[16];
+A_Sixteenth_Of_All_Data_Ever_Needed_To_Function All_Data_Ever_Needed_To_Function[DATA_COUNT];
 
 WebServer server(80);
 Servo myservo;
@@ -53,8 +54,19 @@ const char PAGE[] PROGMEM = R"rawliteral(
 	<p><button class="button" data-name="Reset">Reset Data (no confirmation)</button></p>
 	<p><button class="button" data-name="Emergency_Emergency_Emergency">Insert Emergency Data</button></p>
 	<script>
+		const keys = ["company", "zulu", "pressure", "depth", "light", "temp"];
+		function fill(d) {
+			const rows = document.querySelectorAll("table tr");
+			d.data.forEach((e, c) => keys.forEach((k, r) => {
+				rows[r + 1].cells[c + 1].textContent = e[k];
+			}));
+		}
 		document.querySelectorAll("button").forEach(b => {
-			b.onclick = () => fetch("/" + b.dataset.name).catch(() => {});
+			b.onclick = () => {
+				fetch("/" + b.dataset.name)
+					.then(r => b.dataset.name === "Reload" ? r.json().then(fill) : null)
+					.catch(() => {});
+			};
 		});
 	</script>
 	<table>
@@ -99,7 +111,7 @@ void Start_Mission() {
 	Serial.println("Start_Mission");
 	if (on_mission == 1) {
 		server.send(451, "text/plain", "Impatient for next mission art thou.");
-		return
+		return;
 	}
 	else {
 		server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Olórin");
@@ -109,14 +121,26 @@ void Start_Mission() {
 
 void Reload() {
 	Serial.println("Reload");
-	server.send(200, "text/plain", "Friendly reminder: if you spam this no one will be angry");
+	String json = "{\"data\":[";
+	for (int i = 0; i < DATA_COUNT; i++) {
+		if (i > 0) json += ",";
+		json += "{\"company\":\"" + All_Data_Ever_Needed_To_Function[i].Number_De_Company + "\"";
+		json += ",\"zulu\":\"" + All_Data_Ever_Needed_To_Function[i].Zulu_Time + "\"";
+		json += ",\"pressure\":" + String(All_Data_Ever_Needed_To_Function[i].Pressure, 2);
+		json += ",\"depth\":" + String(All_Data_Ever_Needed_To_Function[i].Depth, 2);
+		json += ",\"light\":" + String(All_Data_Ever_Needed_To_Function[i].Sun_Levels, 2);
+		json += ",\"temp\":" + String(All_Data_Ever_Needed_To_Function[i].Temperature, 2);
+		json += "}";
+	}
+	json += "]}";
+	server.send(200, "application/json", json);
 }
 
 void Reset() {
 	Serial.println("Reset");
 	server.send(200, "text/plain", "Warning - Data has been completely and uterly swept into the trash can - Warning");
-	for (int i = 0; i < 16; i++){
-		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
+	for (int i = 0; i < DATA_COUNT; i++){
+		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_of_Company;
 		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2027-01-01 00:00:01";
 		All_Data_Ever_Needed_To_Function[i].Depth = 0.0;
 		All_Data_Ever_Needed_To_Function[i].Pressure = 0.0;
@@ -128,8 +152,8 @@ void Reset() {
 void Emergency_Emergency_Emergency() {
 	Serial.println("Emergency_Emergency_Emergency");
 	server.send(200, "text/plain", "Warning - Emergency Data has been loaded - Warning");
-	for (int i = 0; i < 16; i++){
-		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
+	for (int i = 0; i < DATA_COUNT; i++){
+		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_of_Company;
 		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2038-01-19 03:14:06";
 		All_Data_Ever_Needed_To_Function[i].Depth = 4294967296;
 		All_Data_Ever_Needed_To_Function[i].Pressure = 65536.0;

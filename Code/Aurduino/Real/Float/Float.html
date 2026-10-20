@@ -19,38 +19,49 @@
 	<p><button class="button" data-name="Reset">Reset Data (no confirmation)</button></p>
 	<p><button class="button" data-name="Emergency_Emergency_Emergency">Insert Emergency Data</button></p>
 	<script>
+		const keys = ["company", "zulu", "pressure", "depth", "light", "temp"];
+		function fill(d) {
+			const rows = document.querySelectorAll("table tr");
+			d.data.forEach((e, c) => keys.forEach((k, r) => {
+				rows[r + 1].cells[c + 1].textContent = e[k];
+			}));
+		}
 		document.querySelectorAll("button").forEach(b => {
-			b.onclick = () => fetch("/" + b.dataset.name).catch(() => {});
+			b.onclick = () => {
+				fetch("/" + b.dataset.name)
+					.then(r => b.dataset.name === "Reload" ? r.json().then(fill) : null)
+					.catch(() => {});
+			};
 		});
 	</script>
 	<table>
 		<tr>
 			<th>Depth: </th>
-			<th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-4M</th><th>-3.5M</th><th>-3M</th><th>-2.5M</th><th>-2M</th><th>-1.5M</th><th>-1M</th><th>-0.5M</th><th>0M</th>
+			<th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-4M</th><th>-3.5M</th><th>-3M</th><th>-2.5M</th><th>-2M</th><th>-1.5M</th><th>-1M</th><th>-0.5M</th><th>0M</th>
 		</tr>
 		<tr>
 			<th>Company Number</th>
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 		</tr>
 		<tr>
 			<th>Zulu Time</th>
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 		</tr>
 		<tr>
 			<th>Pressure</th>
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 		</tr>
 		<tr>
 			<th>Depth</th>
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 		</tr>
 		<tr>
 			<th>Light</th>
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 		</tr>
 		<tr>
 			<th>Temperature</th>
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 		</tr>
 	</table>
 </body>
