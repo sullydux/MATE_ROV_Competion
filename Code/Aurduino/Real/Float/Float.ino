@@ -38,14 +38,17 @@ const char PAGE[] PROGMEM = R"rawliteral(
 	<title>ESP32 Float Web Server</title>
 	<link rel="icon" href="data:,">
 	<style>
+		:root { color-scheme: dark; }
 		html { font-family: monospace; display: inline-block; margin: 0px auto; text-align: center; }
 		.button { background-color: #60a5fa; border: none; color: white; padding: 16px 40px;
 			font-size: 32px; margin: 2px; cursor: pointer; }
+		table { border-collapse: collapse; }
+		th, td { border: 1px solid #444; padding: 0.5rem; min-width: 2rem; text-align: center; }
 	</style>
 </head>
 <body>
 	<h1>ESP32 Float Web Server</h1>
-	<p><button class="button" data-name="Start_Mission">Start Mission (button wont work untill finish)</button></p>
+	<p><button class="button" data-name="Start_Mission">Start Mission</button></p>
 	<p><button class="button" data-name="Reload">Reload Chart</button></p>
 	<p><button class="button" data-name="Reset">Reset Data (no confirmation)</button></p>
 	<p><button class="button" data-name="Emergency_Emergency_Emergency">Insert Emergency Data</button></p>
@@ -54,6 +57,36 @@ const char PAGE[] PROGMEM = R"rawliteral(
 			b.onclick = () => fetch("/" + b.dataset.name).catch(() => {});
 		});
 	</script>
+	<table>
+		<tr>
+			<th>Depth: </th>
+			<th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-2M Way Down</th><th>-4M</th><th>-3.5M</th><th>-3M</th><th>-2.5M</th><th>-2M</th><th>-1.5M</th><th>-1M</th><th>-0.5M</th><th>0M</th>
+		</tr>
+		<tr>
+			<th>Company Number</th>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+			<th>Zulu Time</th>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+			<th>Pressure</th>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+			<th>Depth</th>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+			<th>Light</th>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+		<tr>
+			<th>Temperature</th>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		</tr>
+	</table>
 </body>
 </html>
 )rawliteral";
@@ -64,8 +97,14 @@ void handleRoot() {
 
 void Start_Mission() {
 	Serial.println("Start_Mission");
-	server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Olórin");
-	on_mission
+	if (on_mission == 1) {
+		server.send(451, "text/plain", "Impatient for next mission art thou.");
+		return
+	}
+	else {
+		server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Olórin");
+		on_mission = 1;
+	}
 }
 
 void Reload() {
@@ -92,7 +131,7 @@ void Emergency_Emergency_Emergency() {
 	for (int i = 0; i < 16; i++){
 		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_De_Company;
 		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2038-01-19 03:14:06";
-		All_Data_Ever_Needed_To_Function[i].Depth = 9324726210.0343;
+		All_Data_Ever_Needed_To_Function[i].Depth = 4294967296;
 		All_Data_Ever_Needed_To_Function[i].Pressure = 65536.0;
 		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 256.0;
 		All_Data_Ever_Needed_To_Function[i].Temperature = 16.0;
