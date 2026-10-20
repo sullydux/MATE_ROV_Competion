@@ -31,3 +31,4 @@ yarn-error.log*
 .env.*
 .DS_Store
 Code/Aurduino/.DS_Store
+.DS_Store
