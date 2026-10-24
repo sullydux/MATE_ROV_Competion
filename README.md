@@ -10,7 +10,6 @@
 
 ### Usefull links:
 - [Repository](https://github.com/sullydux/MATE_ROV_Competion?tab=readme-ov-file)
-- [Example Projects for ESP8266 chips](https://github.com/sondrew/ESP8266)
 
 ## Instructions
 
