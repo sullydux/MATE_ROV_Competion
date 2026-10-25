@@ -7,6 +7,7 @@
 
 /*
 Hello dear readers of this code. This will be my only comment.
+Webpage: http://192.168.4.1
 Good luck furture Charlie or other viewers/editors.
 */
 
@@ -16,8 +17,9 @@ const char* ssid     = "NSA Van 37";
 const char* password = "Hard-Pass";
 const int servoPin = 13;
 int on_mission = 0;
+int go = 0;
 
-const int DATA_COUNT = 16;
+const int DATA_COUNT = 17;
 
 struct A_Sixteenth_Of_All_Data_Ever_Needed_To_Function {
 	String Number_De_Company = Number_of_Company;
@@ -114,8 +116,14 @@ void Start_Mission() {
 		return;
 	}
 	else {
-		server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Olórin");
+		server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Gandalf");
 		on_mission = 1;
+    myservo.write(0);
+    delay(200);
+    myservo.write(180);
+    delay(200);
+		on_mission = 0;
+		return;
 	}
 }
 
@@ -141,7 +149,7 @@ void Reset() {
 	server.send(200, "text/plain", "Warning - Data has been completely and uterly swept into the trash can - Warning");
 	for (int i = 0; i < DATA_COUNT; i++){
 		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_of_Company;
-		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2027-01-01 00:00:01";
+		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "0000-00-00 00:00:00";
 		All_Data_Ever_Needed_To_Function[i].Depth = 0.0;
 		All_Data_Ever_Needed_To_Function[i].Pressure = 0.0;
 		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 0.0;
@@ -181,6 +189,12 @@ void setup() {
 	server.on("/Emergency_Emergency_Emergency", Emergency_Emergency_Emergency);
 	server.onNotFound(handleNotFound);
 	server.begin();
+  myservo.setPeriodHertz(50);
+  myservo.attach(servoPin, 500, 2400);
+
+
+	Reset();
+	Reload();
 }
 
 void loop() {
