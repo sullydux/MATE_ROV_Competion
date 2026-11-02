@@ -5,11 +5,11 @@
 Servo myservo;
 
 int pos = 0;
-int repeats = 10;
+int repeats = 50;
 int go = 0;
 int goes = 0;
-int maxMS = 240000;
-int minMS = 60000;
+int maxMS = 24000;
+int minMS = 1000;
 
 int servoPin = 13;
 

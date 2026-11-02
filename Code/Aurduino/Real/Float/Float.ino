@@ -21,7 +21,7 @@ int go = 0;
 
 const int DATA_COUNT = 17;
 
-struct A_Sixteenth_Of_All_Data_Ever_Needed_To_Function {
+struct part_data {
 	String Number_De_Company = Number_of_Company;
 	String Zulu_Time;
 	float Pressure = 0.0;
@@ -29,7 +29,7 @@ struct A_Sixteenth_Of_All_Data_Ever_Needed_To_Function {
 	float Sun_Levels = 0.0;
 	float Temperature = 0.0;
 };
-A_Sixteenth_Of_All_Data_Ever_Needed_To_Function All_Data_Ever_Needed_To_Function[DATA_COUNT];
+part_data data[DATA_COUNT];
 
 WebServer server(80);
 Servo myservo;
@@ -132,12 +132,12 @@ void Reload() {
 	String json = "{\"data\":[";
 	for (int i = 0; i < DATA_COUNT; i++) {
 		if (i > 0) json += ",";
-		json += "{\"company\":\"" + All_Data_Ever_Needed_To_Function[i].Number_De_Company + "\"";
-		json += ",\"zulu\":\"" + All_Data_Ever_Needed_To_Function[i].Zulu_Time + "\"";
-		json += ",\"pressure\":" + String(All_Data_Ever_Needed_To_Function[i].Pressure, 2);
-		json += ",\"depth\":" + String(All_Data_Ever_Needed_To_Function[i].Depth, 2);
-		json += ",\"light\":" + String(All_Data_Ever_Needed_To_Function[i].Sun_Levels, 2);
-		json += ",\"temp\":" + String(All_Data_Ever_Needed_To_Function[i].Temperature, 2);
+		json += "{\"company\":\"" + data[i].Number_De_Company + "\"";
+		json += ",\"zulu\":\"" + data[i].Zulu_Time + "\"";
+		json += ",\"pressure\":" + String(data[i].Pressure, 2);
+		json += ",\"depth\":" + String(data[i].Depth, 2);
+		json += ",\"light\":" + String(data[i].Sun_Levels, 2);
+		json += ",\"temp\":" + String(data[i].Temperature, 2);
 		json += "}";
 	}
 	json += "]}";
@@ -148,12 +148,12 @@ void Reset() {
 	Serial.println("Reset");
 	server.send(200, "text/plain", "Warning - Data has been completely and uterly swept into the trash can - Warning");
 	for (int i = 0; i < DATA_COUNT; i++){
-		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_of_Company;
-		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "0000-00-00 00:00:00";
-		All_Data_Ever_Needed_To_Function[i].Depth = 0.0;
-		All_Data_Ever_Needed_To_Function[i].Pressure = 0.0;
-		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 0.0;
-		All_Data_Ever_Needed_To_Function[i].Temperature = 0.0;
+		data[i].Number_De_Company = Number_of_Company;
+		data[i].Zulu_Time = "0000-00-00 00:00:00";
+		data[i].Depth = 0.0;
+		data[i].Pressure = 0.0;
+		data[i].Sun_Levels = 0.0;
+		data[i].Temperature = 0.0;
 	}
 }
 
@@ -161,12 +161,12 @@ void Emergency_Emergency_Emergency() {
 	Serial.println("Emergency_Emergency_Emergency");
 	server.send(200, "text/plain", "Warning - Emergency Data has been loaded - Warning");
 	for (int i = 0; i < DATA_COUNT; i++){
-		All_Data_Ever_Needed_To_Function[i].Number_De_Company = Number_of_Company;
-		All_Data_Ever_Needed_To_Function[i].Zulu_Time = "2038-01-19 03:14:06";
-		All_Data_Ever_Needed_To_Function[i].Depth = 4294967296;
-		All_Data_Ever_Needed_To_Function[i].Pressure = 65536.0;
-		All_Data_Ever_Needed_To_Function[i].Sun_Levels = 256.0;
-		All_Data_Ever_Needed_To_Function[i].Temperature = 16.0;
+		data[i].Number_De_Company = Number_of_Company;
+		data[i].Zulu_Time = "2038-01-19 03:14:06";
+		data[i].Depth = 4294967296;
+		data[i].Pressure = 65536.0;
+		data[i].Sun_Levels = 256.0;
+		data[i].Temperature = 16.0;
 	}
 }
 
