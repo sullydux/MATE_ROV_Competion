@@ -185,6 +185,7 @@ void handleNotFound() {
 
 void setup() {
 	Serial.begin(115200);
+	Wire.begin();
 	lightMeter.begin();
 
 	WiFi.softAP(ssid, password);
