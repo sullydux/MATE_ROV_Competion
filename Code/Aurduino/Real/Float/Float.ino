@@ -4,6 +4,8 @@
 #include <PID_v1.h>
 #include <string>
 #include <cmath>
+#include "MS5837.h"
+#include <BH1750.h>
 
 /*
 Hello dear readers of this code. This will be my only comment.
@@ -18,6 +20,7 @@ const char* password = "Hard-Pass";
 const int servoPin = 13;
 int on_mission = 0;
 int go = 0;
+int messurement_number = 1;
 
 const int DATA_COUNT = 17;
 
@@ -30,7 +33,8 @@ struct part_data {
 	float Temperature = 0.0;
 };
 part_data data[DATA_COUNT];
-
+MS5837 sensor;
+BH1750 lightMeter;
 WebServer server(80);
 Servo myservo;
 
@@ -113,6 +117,7 @@ void Start_Mission() {
 	Serial.println("Start_Mission");
 	if (on_mission == 1) {
 		server.send(451, "text/plain", "Impatient for next mission art thou.");
+		messurement_number = 1;
 		return;
 	}
 	else {
@@ -122,7 +127,11 @@ void Start_Mission() {
     delay(200);
     myservo.write(180);
     delay(200);
+		sensor.read();
+		data[messurement_number].Sun_Levels = lightMeter.readLightLevel()
+		data[messurement_number].Pressure = sensor.pressure()
 		on_mission = 0;
+		messurement_number = 1;
 		return;
 	}
 }
@@ -176,6 +185,7 @@ void handleNotFound() {
 
 void setup() {
 	Serial.begin(115200);
+	lightMeter.begin();
 
 	WiFi.softAP(ssid, password);
 	Serial.println("");
