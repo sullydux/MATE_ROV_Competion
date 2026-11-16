@@ -152,7 +152,7 @@ void Reload() {
 		json += ",\"zulu\":\"" + data[i].Zulu_Time + "\"";
 		json += ",\"pressure\":" + String(data[i].Pressure, 2);
 		json += ",\"depth\":" + String(data[i].Depth, 2);
-		json += ",\"light\":" + String(data[i].Sun_Levels, 2);
+		json += ",\"light\":\"" + String(data[i].Sun_Levels, 2) + " lux\"";
 		json += ",\"temp\":" + String(data[i].Temperature, 2);
 		json += "}";
 	}
