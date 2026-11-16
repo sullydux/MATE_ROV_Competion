@@ -20,7 +20,7 @@ const char* password = "Hard-Pass";
 const int servoPin = 13;
 int on_mission = 0;
 int go = 0;
-int messurement_number = 1;
+int messurement_number = 0;
 
 const int DATA_COUNT = 17;
 
@@ -32,6 +32,7 @@ struct part_data {
 	float Sun_Levels = 0.0;
 	float Temperature = 0.0;
 };
+
 part_data data[DATA_COUNT];
 MS5837 sensor;
 BH1750 lightMeter;
@@ -117,23 +118,29 @@ void Start_Mission() {
 	Serial.println("Start_Mission");
 	if (on_mission == 1) {
 		server.send(451, "text/plain", "Impatient for next mission art thou.");
-		messurement_number = 1;
+		messurement_number = 0;
 		return;
 	}
 	else {
 		server.send(200, "text/plain", "'Things are now set in motion that cannot be undone' - Gandalf");
 		on_mission = 1;
+
     myservo.write(0);
     delay(200);
     myservo.write(180);
     delay(200);
-		sensor.read();
-		data[messurement_number].Sun_Levels = lightMeter.readLightLevel()
-		data[messurement_number].Pressure = sensor.pressure()
+		Messure();
+
 		on_mission = 0;
-		messurement_number = 1;
+		messurement_number = 0;
 		return;
 	}
+}
+
+void Messure() {
+	sensor.read();
+	data[messurement_number].Sun_Levels = lightMeter.readLightLevel();
+	data[messurement_number].Pressure = sensor.pressure();
 }
 
 void Reload() {
