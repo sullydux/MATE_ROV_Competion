@@ -162,6 +162,9 @@ void Reload() {
 
 void Reset() {
 	Serial.println("Reset");
+	Serial.println("");
+	Serial.println("IP address: ");
+	Serial.println(WiFi.softAPIP());
 	server.send(200, "text/plain", "Warning - Data has been completely and uterly swept into the trash can - Warning");
 	for (int i = 0; i < DATA_COUNT; i++){
 		data[i].Number_De_Company = Number_of_Company;
@@ -196,9 +199,6 @@ void setup() {
 	lightMeter.begin();
 
 	WiFi.softAP(ssid, password);
-	Serial.println("");
-	Serial.println("IP address: ");
-	Serial.println(WiFi.softAPIP());
 
 	server.on("/", handleRoot);
 	server.on("/Start_Mission", Start_Mission);
